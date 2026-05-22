@@ -1,0 +1,101 @@
+---
+function getDateText(date = new Date(), locale = "en-CA") {
+	return date.toLocaleDateString(locale, {
+		year: "numeric",
+		month: "2-digit",
+		day: "2-digit",
+	});
+}
+---
+
+<style>
+	.root {
+		font: 14pt var(--font-pixel-operator);
+		background: white;
+		padding: 1em;
+		width: 300px;
+	}
+
+	.root-layout {
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+		.top {
+			display: flex;
+			flex-direction: column;
+			align-items: safe center;
+		}
+	}
+
+	section {
+		margin: 0.25em 0;
+		width: 200px;
+	}
+
+	section.turtlemay {
+		text-align: center;
+		margin: 0 0 0.5em;
+		.heading {
+			font-weight: bold;
+		}
+	}
+
+	.button-container {
+		display: flex;
+		justify-content: safe end;
+
+		button {
+			background: white;
+			border: 1px solid #999;
+			padding: 2px 25px;
+			user-select: none;
+			cursor: pointer;
+		}
+
+		button[disabled] {
+			color: #ccc;
+			border-color: transparent;
+			cursor: unset;
+		}
+
+		button:not([disabled]):active {
+			filter: invert();
+		}
+	}
+</style>
+
+<div class="root root-layout">
+	<div class="top">
+		<section class="turtlemay">
+			<div class="heading">turtlemay.neocities.org</div>
+			<div>Aaron Thomas Mayer</div>
+		</section>
+		<section>
+			Design inspiration:<br />
+			Apple System 7
+		</section>
+		<section>
+			Fonts used:<br />
+			Pixel Operator, Noto Sans Symbols
+		</section>
+		<section>
+			Tools used:<br />
+			VSCode/Vim, Astro framework.
+		</section>
+	</div>
+	<div class="bottom">
+		<div>Last build: {getDateText()}</div>
+	</div>
+	<div class="button-container">
+		<button onclick="closeSiteInfo(this)">Close</button>
+	</div>
+</div>
+
+<script is:inline>
+	/**
+	 * @param {HTMLButtonElement} el
+	 */
+	function closeSiteInfo(el) {
+		el.dispatchEvent(new CustomEvent("DIALOG_CLOSE", { bubbles: true }));
+	}
+</script>

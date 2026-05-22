@@ -1,0 +1,14 @@
+[
+	{
+		"href": "http://turtlemay.us",
+		"linkText": "turtlemay.us",
+		"description": "my main homepage",
+		"icon": "🖹"
+	},
+	{
+		"href": "http://minecraft.turtlemay.us",
+		"linkText": "mc.trtl.in",
+		"description": "my minecraft server site",
+		"icon": "🖺"
+	}
+]

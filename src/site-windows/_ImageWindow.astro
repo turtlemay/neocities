@@ -1,0 +1,11 @@
+---
+import { Image } from "astro:assets";
+import CoolWindow from "../components/CoolWindow.vue";
+import myImage from "../../assets/IMG_20250109_150450_hollow.png";
+---
+
+<CoolWindow title="Image Viewer">
+	<div class="myImage">
+		<Image width="400" src={myImage} alt="snowy park viewed from a gazebo" />
+	</div>
+</CoolWindow>

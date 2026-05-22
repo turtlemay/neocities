@@ -1,0 +1,63 @@
+---
+import MainLayout from "../_MainLayout.astro";
+import CoolWindow from "../components/CoolWindow.vue";
+---
+
+<style>
+	.notfound {
+		max-width: 400px;
+		overflow-y: scroll;
+		max-width: 300px;
+
+		> * {
+			margin: 1em;
+		}
+
+		> :first-child {
+			display: flex;
+			gap: 10px;
+			align-items: safe center;
+			justify-content: safe center;
+		}
+	}
+
+	.qmark {
+		--size: 30px;
+		flex-shrink: 0;
+		width: var(--size);
+		height: var(--size);
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: black;
+		color: white;
+		user-select: none;
+	}
+
+	.home-callout {
+		display: flex;
+		justify-content: center;
+	}
+</style>
+
+<MainLayout>
+	<div>
+		<div class="window-row">
+			<CoolWindow title="404 - Not Found">
+				<div class="notfound">
+					<section>
+						<div class="qmark" role="presentation">
+							<div>?</div>
+						</div>
+						<p>The requested resource was not found.</p>
+					</section>
+					<section>
+						<div class="home-callout">
+							<a href="/">Go Home</a>
+						</div>
+					</section>
+				</div>
+			</CoolWindow>
+		</div>
+	</div>
+</MainLayout>

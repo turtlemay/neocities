@@ -1,0 +1,65 @@
+<head>
+	<meta charset="utf-8" />
+	<meta name="generator" content={Astro.generator} />
+	<link rel="icon" href="/favicon.svg" />
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" />
+	<script is:inline type="module" src="/lib/scroll-anchors.js"></script>
+	<script src="./_key-listener.js"></script>
+	<script src="./_x-text-animator.js"></script>
+	<script src="./index.css"></script>
+	<title>Turtlemay's Text Animator</title>
+</head>
+
+<body class="site-layout">
+	<div class="site-attraction" role="presentation">
+		<div class="demo-components" id="demoComponents">
+			<div class="demo-component a">
+				<x-text-animator autoplay="visible">
+					Pack my box with five dozen liquor jugs.
+				</x-text-animator>
+			</div>
+			<div class="demo-component b">
+				<x-text-animator autoplay="visible" interval="70" id="testComponent">
+					<span>The quick brown fox jumps over the lazy dog.</span>
+				</x-text-animator>
+			</div>
+			<div class="demo-component c">
+				<x-text-animator autoplay="visible">
+					Sphinx of black quartz, judge my vow.
+				</x-text-animator>
+			</div>
+		</div>
+		<div class="info-text" id="demoReplayer">
+			<em>Click</em> or <em>press F</em> to re-play.
+		</div>
+	</div>
+	<div class="site-main-wrapper">
+		<div class="site-main">
+			<slot />
+		</div>
+	</div>
+	<footer class="site-footer">
+		<x-text-animator autoplay="visible">
+			Made by <a href="https://turtlemay.neocities.org/">Turtlemay</a>
+		</x-text-animator>
+	</footer>
+</body>
+
+<script is:inline>
+	demoReplayer.style.cursor = "pointer";
+	demoReplayer.addEventListener("click", replayDemo);
+
+	setInterval(() =>
+		demoReplayer.dataset.busy = demoComponents.matches(":has(:state(playing))"));
+
+	addEventListener("turtlemay:keydownonce", ({ detail: event }) => {
+		const modifier = event.ctrlKey || event.altKey || event.metaKey;
+		if (event.code === "KeyF" && !modifier) replayDemo();
+	});
+
+	function replayDemo() {
+		document.querySelectorAll("x-text-animator")
+			.forEach(v => v.play(true));
+	}
+</script>

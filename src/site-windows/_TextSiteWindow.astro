@@ -1,0 +1,49 @@
+---
+import CoolWindow from "../components/CoolWindow.vue";
+---
+
+<style>
+	.terminalWindow {
+		display: flex;
+		flex-direction: column;
+		gap: 0.5em;
+		width: 300px;
+		padding: 20px;
+
+		& {
+			background: #111;
+			color: #999;
+		}
+		::selection {
+			background: #fff;
+			color: #000;
+		}
+	}
+
+	.terminalPrompt {
+		color: #fff;
+		display: flex;
+		gap: 0.25em;
+	}
+
+	.terminalPromptText {
+		color: #999;
+		user-select: none;
+		pointer-events: none;
+	}
+
+	.addr {
+		display: inline-block;
+		user-select: all;
+	}
+</style>
+
+<CoolWindow title="tm.trtl.in">
+	<div class="terminalWindow">
+		<div>Visit my teletext site from your terminal or browser:</div>
+		<div class="terminalPrompt">
+			<span class="terminalPromptText" role="presentation">></span>
+			<span>lynx <span class="addr">tm.trtl.in</span></span>
+		</div>
+	</div>
+</CoolWindow>

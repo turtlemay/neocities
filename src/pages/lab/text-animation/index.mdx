@@ -1,0 +1,184 @@
+---
+layout: ./_MainLayout.astro
+---
+import scriptUrl from "./_x-text-animator.js?url";
+
+<section>
+# Turtlemay's Text Animator
+This <em class="emphasis">web component</em>
+automatically adds a simple character-by-character animation to any text.
+</section>
+
+<section>
+## Installation
+
+Download the
+<a href={scriptUrl}>javascript file</a>
+to your site files, then import the script at the top of your page.
+
+```html
+<script src="x-text-animator.js"></script>
+```
+</section>
+
+<section>
+## Basic Usage
+
+Use the `<x-text-animator>` custom element with any text content.
+
+**They are *inline* elements by default.**
+
+Include the `autoplay` attribute to automatically run the animation or use `autoplay="visible"` to play every time the element scrolls into view.
+
+```html
+<!-- This will automatically animate once, when it loads. -->
+<x-text-animator autoplay>lorem ipsum</x-text-animator>
+
+<!-- This will animate every time it comes into view. -->
+<x-text-animator autoplay="visible">dolor sit</x-text-animator>
+```
+
+**Important**: If not auto-started, `<x-text-animator>` contents will be rendered but invisible until `.play()` is called. (See <a href="#scripting">scripting</a>).
+</section>
+
+<section>
+## Styling
+
+You can style `<x-text-animator>` elements and their contents however you like including making them a block, but for general styling it is recommended to use them *inside* a block container where you will assign your rules.
+
+```html
+<!-- Put styles on your container. -->
+<div class="my-element">
+  <x-text-animator>my text</x-text-animator>
+</div>
+```
+
+`<x-text-animator>` elements that are currently playing will have the `:state(playing)` pseudo-class. You can use this for pointer events, animations, etc.
+
+```css
+x-text-animator:state(playing) {
+  /* Prevent links from being clicked while animating. */
+  a[href] {
+    pointer-events: none;
+  }
+}
+
+```
+</section>
+
+<section>
+## Tips & Technical Usage
+
+All nested elements are retained, so you can use any structure you want inside the component and every text node will be animated in order.
+
+```html
+<!-- Remember to use the appropriate `display` style
+     if you want to use block-level content. -->
+<x-text-animator autoplay style="display: block">
+  <!-- Everything in here will be animated. -->
+  <h2>my title</h2>
+  <p>my paragraph</p>
+</x-text-animator>
+```
+
+Because individual text nodes are not styleable, all text nodes regardless of structure will be automatically wrapped in a `<span>` as well as each individual text character during animation. These containers are removed after the animation is complete.
+
+### Avoid FOUC
+
+To ensure your hidden content doesn't pop up before the component is finished loading (known as
+<a href="https://en.wikipedia.org/wiki/Flash_of_unstyled_content" title="Flash of Unstyled Content">FOUC</a>),
+you can hide custom elements before they are loaded with `visibility: hidden`, `display: none`, `opacity: 0`, etc in your static styles.
+
+```css
+/* Hide all custom elements until their scripts have loaded. */
+:not(:defined) {
+  visibility: hidden;
+}
+```
+</section>
+
+<section>
+## Optional Configuration
+
+You can adjust the interval between text characters with the `interval` attribute in milliseconds.
+
+```html
+<x-text-animator interval="40">hello world</x-text-animator>
+```
+
+Alternatively, use the `duration` attribute instead to specify the total animation time in milliseconds.
+
+```html
+<x-text-animator duration="1000">hello world</x-text-animator>
+```
+</section>
+
+<section id="scripting">
+## Scripting
+
+You can call the `.play()` method to start the animation manually as many times as you want. The `play` function is asynchronous, so you can optionally use `await` or `.then()` to wait for it to finish.
+
+This could be used when changing out text, such as in a dialogue box.
+
+```html
+<x-text-animator id="myText">lorem ipsum</x-text-animator>
+
+<script>
+function example1() {
+  // Play the animation and continue.
+  myText.play();
+}
+
+function example2() {
+  // Play the animation and wait.
+  await myText.play();
+}
+
+async function example3() {
+  // Play the animation and continue.
+  myText.play().then(() => {
+    // do something when animation is complete
+  });
+}
+</script>
+```
+
+You can also listen for the `"x-complete"` event sent from the element.
+
+```javascript
+myText.addEventListener("x-complete", () => {
+// do something when the animation completes
+});
+```
+
+Check if the animation is currently playing with `.isPlaying()`.
+
+```javascript
+if (myText.isPlaying()) {
+// do something
+}
+```
+
+You can reset the animation state with the `.reset()` method or force restart the animation with `.play(true)`.
+
+```javascript
+// Reset the animation to be played again later.
+// Content will be invisible until animation starts.
+// If `autoplay` is set, it will immediately start playing again.
+myText.reset(); // or `await myText.reset();`
+
+// Reset to completed state and show all content.
+myText.reset(true);
+```
+
+```javascript
+// Force reset and start the animation if it is already playing.
+myText.play(true);
+```
+</section>
+
+<section>
+## Changelog
+2025-05-07
+- `1.0` Initial release.
+</section>

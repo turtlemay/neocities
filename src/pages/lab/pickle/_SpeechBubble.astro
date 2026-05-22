@@ -1,0 +1,111 @@
+<style>
+	.speech-bubble {
+		--bg-color: rgba(0, 0, 0, 0.5);
+		--tail-size: 40px;
+		--border-radius: 10px;
+		display: block;
+		left: calc(50% + 40px);
+		top: 200px;
+		translate: -50%;
+		border-radius: var(--border-radius);
+		background: var(--bg-color);
+		backdrop-filter: blur(5px);
+		color: #ddd;
+		font:
+			italic 14pt "Noto Serif",
+			sans-serif;
+		padding: 20px 20px 10px;
+		position: absolute;
+		z-index: 20000;
+		pointer-events: all;
+		transition:
+			opacity 200ms,
+			transform 200ms;
+	}
+
+	.speech-bubble:not([open]) {
+		opacity: 0;
+		transform: scaleY(0.9) translateY(-50px);
+		user-select: none;
+		pointer-events: none;
+	}
+
+	.speech-bubble:after {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 50%;
+		width: 0;
+		height: 0;
+		border: var(--tail-size) solid transparent;
+		border-bottom-color: var(--bg-color);
+		border-top: 0;
+		border-left: 0;
+		margin-left: calc(-0.5 * var(--tail-size));
+		margin-top: calc(-1 * var(--tail-size));
+		transform: scaleX(0.4);
+	}
+
+	.speech-text {
+		width: 250px;
+		height: 4em;
+		overflow-y: auto;
+
+		.anim-char {
+			transition: opacity 200ms;
+			&.hidden {
+				opacity: 0;
+			}
+		}
+	}
+
+	.speech-break {
+		margin: 10px auto;
+		display: flex;
+		align-items: center;
+		justify-content: end;
+		color: rgba(255, 255, 255, 0.5);
+		user-select: none;
+
+		> * {
+			font: 25px monospace;
+			width: 10px;
+			height: 10px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+		}
+	}
+
+	[data-name="close-speech"] {
+		cursor: pointer;
+	}
+
+	.sway-animator {
+		animation: sway-animation 1s linear infinite;
+	}
+
+	@keyframes sway-animation {
+		25% {
+			transform: rotate(10deg);
+		}
+		75% {
+			transform: rotate(-10deg);
+		}
+	}
+</style>
+
+<x-speech-bubble class="speech-bubble">
+	<div class="speech-text">
+		<span data-name="text">The quick brown fox jumps over the lazy dog.</span>
+	</div>
+	<div class="speech-break" role="presentation">
+		<div class="sway-animator" data-name="close-speech">★</div>
+	</div>
+</x-speech-bubble>
+
+<script>
+	import { XSpeechBubble } from "./_XSpeechBubble.ts";
+
+	customElements.define("x-speech-bubble", XSpeechBubble);
+</script>

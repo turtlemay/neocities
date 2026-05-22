@@ -1,0 +1,161 @@
+---
+import SiteHeader from "./_SiteHeader.astro";
+import SiteFooter from "./_SiteFooter.astro";
+import SiteModal from "./_SiteModal.astro";
+import PickleJar from "./_PickleJar.astro";
+---
+
+<!-- 2026/04/28 -->
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="generator" content={Astro.generator} />
+	<link rel="icon" href="/favicon.svg" />
+	<link rel="preconnect" href="https://fonts.googleapis.com" />
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+	<link
+		rel="preload"
+		as="style"
+		href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Rye&display=swap"
+	/>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Rye&display=swap"
+		rel="stylesheet"
+	/>
+	<title>Ask the Orickle</title>
+	<script src="./_index.ts"></script>
+</head>
+
+<style is:global>
+	* {
+		box-sizing: border-box;
+	}
+
+	::selection {
+		background: rgba(0, 0, 0, 0.75);
+		color: white;
+	}
+</style>
+
+<style>
+	body {
+		margin: 0;
+		background: dimgray;
+
+		&[data-busy] {
+			cursor: wait;
+		}
+	}
+
+	.siteLayout {
+		display: flex;
+		flex-direction: column;
+		align-items: safe center;
+		min-height: 100vh;
+
+		.siteLayout_top {
+			flex: 1;
+		}
+
+		.siteLayout_bottom {
+			width: 100%;
+		}
+	}
+
+	.mainLayout {
+		display: grid;
+		grid-template-columns: minmax(auto, 500px) minmax(auto, 300px);
+		grid-template-areas:
+			"area1 area3"
+			"area2 area3";
+		align-items: safe center;
+		justify-content: safe center;
+		row-gap: 2em;
+		column-gap: 3em;
+		width: 100%;
+		padding: 1em;
+		overflow: hidden;
+
+		.mainLayout_contentTop {
+			grid-area: area1;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: end;
+			justify-content: safe center;
+		}
+
+		.mainLayout_contentBottom {
+			grid-area: area2;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: start;
+			justify-content: safe center;
+		}
+
+		.mainLayout_contentSide {
+			grid-area: area3;
+			width: 100%;
+			height: 100%;
+			display: flex;
+			align-items: safe center;
+			justify-content: safe center;
+		}
+	}
+
+	@media (width < 800px) {
+		.mainLayout {
+			grid-template-areas:
+				"area1 area1"
+				"area1 area1"
+				"area3 area3"
+				"area3 area3"
+				"area2 area2"
+				"area2 area2";
+		}
+	}
+
+	.siteMain {
+		font:
+			14pt "Rye",
+			sans-serif;
+		color: rgba(255, 255, 255, 0.5);
+		background: rgba(0, 0, 0, 0.21);
+		border: 1px solid rgba(0, 0, 0, 0.05);
+		border-radius: 10px;
+
+		em {
+			color: white;
+			font-style: normal;
+		}
+
+		.mainText {
+			margin: 2em;
+			text-align: center;
+		}
+	}
+</style>
+
+<body class="siteLayout">
+	<div class="siteLayout_top mainLayout">
+		<div class="mainLayout_contentTop">
+			<SiteHeader />
+		</div>
+		<div class="mainLayout_contentBottom">
+			<div class="siteMain">
+				<p class="mainText">
+					Gaze into <em title="oracle pickle">The Orickle</em>'s crystal jar.<br />
+					Click him to receive your fortune.
+				</p>
+			</div>
+		</div>
+		<div class="mainLayout_contentSide">
+			<PickleJar />
+		</div>
+	</div>
+	<div class="siteLayout_bottom">
+		<SiteFooter />
+	</div>
+	<SiteModal />
+</body>

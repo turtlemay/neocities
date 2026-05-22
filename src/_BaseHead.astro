@@ -1,0 +1,25 @@
+---
+import { Font } from "astro:assets";
+
+interface Props {
+	title: string;
+}
+---
+
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width" />
+<meta name="generator" content={Astro.generator} />
+<link rel="icon" href="favicon.svg" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+	rel="preload"
+	as="style"
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap"
+/>
+<link
+	rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap"
+/>
+<Font preload cssVariable="--font-pixel-operator" />
+<title>{Astro.props.title}</title>

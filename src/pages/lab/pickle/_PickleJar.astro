@@ -1,0 +1,282 @@
+---
+import SpeechBubble from "./_SpeechBubble.astro";
+---
+
+<style>
+	* {
+		box-sizing: border-box;
+	}
+
+	.jar {
+		--jar-width: 300px;
+		--jar-height: 400px;
+		width: var(--jar-width);
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		pointer-events: none;
+
+		.jar-lid {
+			border-top-left-radius: 15px;
+			border-top-right-radius: 15px;
+			border-bottom-left-radius: 5px;
+			border-bottom-right-radius: 5px;
+			height: 25px;
+			width: calc(var(--jar-width) - 30px);
+			background: linear-gradient(
+				to right,
+				burlywood 0%,
+				goldenrod 50%,
+				burlywood 100%
+			);
+			z-index: 500;
+		}
+
+		.jar-neck {
+			width: calc(var(--jar-width) - 50px);
+			height: 20px;
+			margin-bottom: -2px;
+			background: linear-gradient(
+				to right,
+				rgba(200, 200, 200, 0.5) 0%,
+				rgba(100, 100, 100, 0.5) 10%,
+				rgba(100, 100, 100, 0.5) 50%,
+				rgba(200, 200, 200, 0.5) 100%
+			);
+			z-index: 300;
+		}
+
+		.jar-glass-container {
+			width: var(--jar-width);
+			height: var(--jar-height);
+			border-top-left-radius: 35px;
+			border-top-right-radius: 35px;
+			border-bottom-left-radius: 25px;
+			border-bottom-right-radius: 25px;
+			position: relative;
+			overflow: hidden;
+			z-index: 500;
+
+			.jar-glass {
+				width: 100%;
+				height: 100%;
+				background: linear-gradient(
+					to right,
+					rgba(200, 200, 200, 0.5) 0%,
+					rgba(100, 100, 100, 0.5) 10%,
+					rgba(100, 100, 100, 0.5) 50%,
+					rgba(200, 200, 200, 0.5) 100%
+				);
+				z-index: 300;
+			}
+
+			.jar-liquid-container {
+				position: absolute;
+				left: 0;
+				bottom: 0;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+				margin-bottom: 15px;
+				z-index: 200;
+
+				.jar-liquid {
+					height: 75%;
+					width: 200%;
+					position: absolute;
+					left: -50%;
+					bottom: -15px;
+					background: linear-gradient(
+						to bottom,
+						rgba(126, 218, 5, 0.1) 0%,
+						rgba(136, 218, 5, 0.3) 100%
+					);
+					filter: hue-rotate(-20deg);
+					backdrop-filter: blur(2px);
+				}
+			}
+		}
+
+		.pickle {
+			position: absolute;
+			left: 50%;
+			top: 55%;
+			translate: -50% -50%;
+			font:
+				calc(0.75 * var(--jar-width)) "Noto Color Emoji",
+				monospace;
+			filter: hue-rotate(-40deg);
+			z-index: 100;
+			transition: transform 200ms ease-in-out;
+			-webkit-tap-highlight-color: transparent;
+			cursor: pointer;
+			user-select: none;
+			pointer-events: all;
+
+			&.clickable:hover {
+				transform: translateY(-10px) rotate(2deg);
+			}
+
+			&.clickable:active {
+				transform: translateY(5px) rotate(-1deg);
+			}
+
+			.char {
+				transform: rotate(-45deg);
+			}
+		}
+
+		.jar-base {
+			width: calc(var(--jar-width) - 40px);
+			height: 10px;
+			margin-top: -5px;
+			background: linear-gradient(
+				to right,
+				rgba(200, 200, 200, 0.25) 0%,
+				rgba(100, 100, 100, 0.25) 10%,
+				rgba(100, 100, 100, 0.25) 50%,
+				rgba(200, 200, 200, 0.25) 100%
+			);
+			border-radius: 20px;
+			z-index: 100;
+		}
+
+		.jar-label {
+			position: absolute;
+			left: 50%;
+			top: 55%;
+			translate: -50% -50%;
+			width: 100%;
+			height: 120px;
+			background: linear-gradient(
+				to right,
+				burlywood 0%,
+				goldenrod 50%,
+				burlywood 100%
+			);
+			border: 3px solid burlywood;
+			border-left: 0;
+			border-right: 0;
+			z-index: 1000;
+			user-select: none;
+			overflow: hidden;
+
+			.jar-label-animator {
+				width: 100%;
+				height: 100%;
+			}
+
+			.jar-label-text {
+				font:
+					bold 25pt "Rye",
+					sans-serif;
+				text-transform: uppercase;
+				color: rgba(255, 235, 122, 0.486);
+				width: 100%;
+				height: 100%;
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
+
+				.text.line1 {
+					font-size: 0.75em;
+				}
+
+				.text.line2 {
+					font-size: 1.25em;
+				}
+			}
+
+			.jar-label-symbol {
+				font:
+					100pt "Noto Color Emoji",
+					monospace;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				position: absolute;
+				left: 50%;
+				top: 70%;
+				translate: -50% -50%;
+				filter: grayscale(0.5);
+				opacity: 0.05;
+				user-select: none;
+
+				.char {
+					margin: 0;
+					z-index: 1;
+
+					&:nth-of-type(2) {
+						z-index: 2;
+					}
+				}
+			}
+		}
+	}
+
+	.pickle-float-animator {
+		animation: pickle-float-animation 3s ease-in-out infinite;
+	}
+
+	.jar-liquid-animator {
+		animation: jar-liquid-animation 3s linear infinite;
+	}
+
+	@keyframes jar-liquid-animation {
+		25% {
+			transform: translateY(5px) rotate(2deg);
+		}
+
+		50% {
+			transform: translateY(10px) rotate(0);
+		}
+
+		75% {
+			transform: translateY(5px) rotate(-2deg);
+		}
+	}
+
+	@keyframes pickle-float-animation {
+		50% {
+			transform: translateY(-10px) rotate(-4deg);
+		}
+	}
+</style>
+
+<div class="jar">
+	<div class="jar-lid jar-lid-animator"></div>
+	<div class="jar-neck"></div>
+	<div class="jar-glass-container">
+		<div class="jar-glass"></div>
+		<div class="jar-liquid-container">
+			<div class="jar-liquid jar-liquid-animator"></div>
+		</div>
+	</div>
+	<div class="pickle clickable">
+		<div class="pickle-animator">
+			<div class="pickle-float-animator">
+				<div class="char" role="presentation">🥒</div>
+			</div>
+		</div>
+	</div>
+	<div class="jar-base"></div>
+	<div class="jar-label">
+		<div class="jar-label-animator">
+			<div class="jar-label-text">
+				<span class="text line1">Kosher Dill</span>
+				<span class="text line2">Seers</span>
+			</div>
+			<div class="jar-label-symbol" role="presentation">
+				<div class="char">🥮</div>
+				<div class="char">🥮</div>
+				<div class="char">🥮</div>
+			</div>
+		</div>
+	</div>
+	<div class="speech-container">
+		<SpeechBubble />
+	</div>
+</div>

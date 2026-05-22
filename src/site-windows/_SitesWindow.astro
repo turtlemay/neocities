@@ -1,0 +1,86 @@
+---
+import myLinks from "../../src/my-sites.json";
+import CoolWindow from "../components/CoolWindow.vue";
+---
+
+<style>
+	a:link,
+	a:visited {
+		color: inherit;
+		text-decoration: inherit;
+		background: inherit;
+	}
+
+	ul.my-links {
+		display: flex;
+		padding: 15px 10px;
+		margin: 0;
+		list-style-type: none;
+		flex-wrap: wrap;
+
+		li {
+			width: 120px;
+		}
+	}
+
+	.item-layout {
+		display: flex;
+		flex-direction: column;
+		align-items: safe center;
+		justify-content: safe center;
+	}
+
+	.item-icon {
+		font: 40px "Noto Sans Symbols 2";
+		display: grid;
+		align-items: center;
+		justify-content: center;
+		width: 50px;
+		height: 50px;
+		user-select: none;
+	}
+
+	.item-text {
+		display: inline-block;
+		line-height: 0.8;
+		text-align: center;
+	}
+
+	ul.my-links li:active .item-icon,
+	ul.my-links li:active .item-text span {
+		background-color: #fff;
+		color: #000;
+		filter: invert(1);
+	}
+
+	.my-links {
+		* {
+			pointer-events: none;
+		}
+
+		.pointable {
+			pointer-events: all;
+		}
+	}
+</style>
+
+<CoolWindow title="My Sites">
+	<div>
+		<ul class="my-links">
+			{
+				myLinks.map((v) => (
+					<li>
+						<a class="item-layout" href={v.href}>
+							<div class="item-icon">
+								<span class="pointable">{v.icon}</span>
+							</div>
+							<div class="item-text">
+								<span class="pointable">{v.description}</span>
+							</div>
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</CoolWindow>

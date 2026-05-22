@@ -1,0 +1,116 @@
+<style>
+	dialog {
+		position: absolute;
+		display: flex;
+		align-items: safe center;
+		justify-content: safe center;
+		width: 100%;
+		height: 100%;
+		border: 0;
+		outline: 0;
+		font: 12pt "Noto Serif";
+		transition: opacity 200ms;
+		z-index: 20000;
+		background: transparent;
+
+		&:not([open]) {
+			opacity: 0;
+			user-select: none;
+			pointer-events: none;
+		}
+
+		&[open] {
+			opacity: 1;
+		}
+
+		.backdrop {
+			position: fixed;
+			left: 0;
+			top: 0;
+			width: 100vw;
+			height: 100vh;
+			background: rgba(0, 0, 0, 0.5);
+			z-index: 10000;
+		}
+	}
+
+	.dialog-main {
+		background: rgba(0, 0, 0, 0.75);
+		backdrop-filter: blur(2px);
+		border-radius: 10px;
+		color: #a0a0a0;
+		transition: transform 200ms;
+		min-height: 300px;
+		width: 100%;
+		max-width: 400px;
+		z-index: 10100;
+
+		dialog:not([open]) & {
+			transform: translateY(-25px);
+		}
+
+		dialog[open] & {
+			transform: none;
+		}
+
+		> * {
+			margin: 2em;
+		}
+	}
+
+	::selection {
+		background: white;
+		color: black;
+	}
+
+	section {
+		margin: 1em 0;
+	}
+
+	[role="heading"] {
+		font: bold 14pt "Noto Serif";
+		margin: 0;
+		color: white;
+
+		&::after {
+			content: ":";
+			opacity: 0.5;
+		}
+	}
+
+	p {
+		margin: 0;
+	}
+</style>
+
+<dialog id="creditsModal">
+	<div class="backdrop" onclick="creditsModal.close()"></div>
+	<div class="dialog-main">
+		<aside>
+			<section>
+				<p>April 2026</p>
+			</section>
+			<section>
+				<h2 role="heading">Tools used</h2>
+				<p>GSAP animation framework</p>
+			</section>
+			<section>
+				<h2 role="heading">Fonts used</h2>
+				<p>Rye, Noto Serif, Noto Color Emoji</p>
+			</section>
+		</aside>
+	</div>
+</dialog>
+
+<script>
+	declare const creditsModal: HTMLDialogElement;
+
+	addEventListener("keydown", (event) => {
+		if (creditsModal.open) {
+			if (event.key === "Escape") {
+				event.preventDefault();
+				creditsModal.close();
+			}
+		}
+	});
+</script>

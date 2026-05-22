@@ -1,0 +1,95 @@
+---
+layout: ./_MainLayout.astro
+---
+
+import scriptUrl from "./_x-calendar-widget.js?url";
+
+<section>
+# Turtlemay's Calendar Widget
+This simple customizable calendar widget shows the current month with today's date highlighted. It can also show any other specified month.
+</section>
+
+<section>
+## Installation
+
+Download the
+<a href={scriptUrl}>javascript file</a>
+to your site and include it at the top of your page.
+
+```html
+<script type="module" src="x-calendar-widget.js"></script>
+```
+</section>
+
+<section>
+## Usage
+
+Use a `<x-calendar-widget>` anywhere you want.
+
+```html
+<!-- Place the custom element. -->
+<x-calendar-widget></x-calendar-widget>
+```
+
+```html
+<!-- Optionally specify a month. -->
+<x-calendar-widget date="Jan 3000"></x-calendar-widget>
+<!-- Optionally always show all six weeks. -->
+<x-calendar-widget sixweek="true"></x-calendar-widget>
+<!-- Optionally use a shorter format month name. -->
+<x-calendar-widget short="true"></x-calendar-widget>
+```
+</section>
+
+<section>
+## Customization
+
+Style any part of the widget with your own CSS rules.
+
+```html
+<x-calendar-widget class="my-calendar">
+  <style>
+  .my-calendar .calendar-widget {
+    background: cornflowerblue;
+    width: 250px;
+    height: 250px;
+  }
+  </style>
+</x-calendar-widget>
+```
+</section>
+
+<section>
+## Scripting
+
+You can navigate by month with the `goNextMonth` and `goPrevMonth` methods.	
+```javascript
+const elem = document.querySelector("x-calendar-widget");
+elem.goNextMonth();
+elem.goPrevMonth();
+elem.resetMonth();
+```
+
+These can be bound to buttons etc.
+```html
+<x-calendar-widget id="myWidget"></x-calendar-widget>
+<button onclick="myWidget.goPrevMonth()">Prev</button>
+<button onclick="myWidget.goNextMonth()">Next</button>
+<button onclick="myWidget.resetMonth()">Reset</button>
+```
+</section>
+
+<section>
+## Changelog
+
+**2026/05/07**
+- `1.4` Using single javascript file instead of html.
+
+**2026/05/02**
+- `1.3` Added methods for moving to next/prev month.
+- `1.2` Render the appropriate number of weeks if less than 6.
+- `1.1` Allow changing date attribute dynamically.
+
+**2026/05/01**
+- `1.0` Initial release.
+</section>

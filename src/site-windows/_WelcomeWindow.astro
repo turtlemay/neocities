@@ -1,0 +1,46 @@
+---
+import CoolWindow from "../components/CoolWindow.vue";
+import CoolSeparator from "../components/CoolSeparator.astro";
+---
+
+<style>
+	.welcome {
+		max-width: 400px;
+		overflow-y: scroll;
+
+		> * {
+			margin: 1em;
+		}
+	}
+
+	a[data-site-info-opener] {
+		cursor: help;
+		&::before {
+			content: "[ ";
+		}
+		&::after {
+			content: " ]";
+		}
+	}
+</style>
+
+<CoolWindow title="Turtlemay's Page">
+	<div class="welcome">
+		<section>
+			<p>
+				You've discovered my
+				<a href="https://neocities.org/site/turtlemay">neocities</a>
+				page!
+			</p>
+			<p>
+				There's not much here yet. This is where I will post random web
+				experiments, shrines, doodles, linkrolls, and other content related to
+				the indie web. See my other sites for my main writing, photos, and projects.
+			</p>
+		</section>
+		<CoolSeparator />
+		<section style="display: flex; justify-content: center;">
+			<a href="#" data-site-info-opener>About this site</a>
+		</section>
+	</div>
+</CoolWindow>

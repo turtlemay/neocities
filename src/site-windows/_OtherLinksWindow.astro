@@ -1,0 +1,60 @@
+---
+import CoolWindow from "../components/CoolWindow.vue";
+---
+
+<style>
+	.window-content {
+		width: 280px;
+		overflow-y: scroll;
+
+		> * {
+			margin: 1em;
+		}
+
+		> :last-of-type {
+			margin-bottom: 2em;
+		}
+	}
+
+	section {
+		margin: 0 0 1em;
+	}
+
+	h2 {
+		font-weight: bold;
+		text-transform: none;
+		&::after {
+			content: ":";
+		}
+	}
+
+	ul.links {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		li {
+			margin: 0.25em 0;
+		}
+		.detail {
+			margin-left: 0.25em;
+		}
+	}
+</style>
+
+<CoolWindow class="lists-window" title="Other Links">
+	<div class="window-content">
+		<section>
+			<h2>Fun Stuff</h2>
+			<ul class="links">
+				<li>
+					<a
+						href="https://www.youtube.com/playlist?list=PL-m7ma_eRGKvLjtr1AytE7e8kPrOiADqu"
+					>
+						Important Videos
+					</a>
+					<span class="detail">(YouTube)</span>
+				</li>
+			</ul>
+		</section>
+	</div>
+</CoolWindow>

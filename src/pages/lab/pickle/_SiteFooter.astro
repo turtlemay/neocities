@@ -1,0 +1,74 @@
+<style>
+	.siteFooter {
+		background: rgba(0, 0, 0, 0.9);
+		width: 100%;
+		padding: 2em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.25em;
+		align-items: safe center;
+		justify-content: safe center;
+		font:
+			12pt "Noto Serif",
+			sans-serif;
+		color: #666;
+	}
+
+	.siteFooter_top {
+		font:
+			12pt "Noto Serif",
+			sans-serif;
+		color: #666;
+	}
+
+	.siteFooter_bottom {
+		font:
+			12pt "Noto Serif",
+			sans-serif;
+		color: #666;
+	}
+
+	.siteFooter a {
+		color: white;
+		text-decoration: none;
+
+		&.creditsLink {
+			color: #666;
+			display: inline-flex;
+			gap: 0.1em;
+			&::before {
+				content: "[";
+				color: #333;
+			}
+			&::after {
+				content: "]";
+				color: #333;
+			}
+		}
+	}
+
+	.separator {
+		&::after {
+			content: "–";
+			color: #333;
+		}
+	}
+
+	::selection {
+		background: white;
+		color: black;
+	}
+</style>
+
+<footer class="siteFooter">
+	<div class="siteFooter_top">
+		Made by
+		<a href="https://turtlemay.neocities.org/">Turtlemay</a>
+		<!-- <span class="separator"></span> -->
+	</div>
+	<div class="siteFooter_bottom">
+		<a class="creditsLink" href="#" onclick="creditsModal.show()">
+			Click for credits
+		</a>
+	</div>
+</footer>

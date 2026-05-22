@@ -1,0 +1,137 @@
+---
+import CoolWindow from "../components/CoolWindow.vue";
+import CoolSection from "../components/CoolSection.astro";
+import { myAge } from "../../src/my-age.js";
+---
+
+<style>
+	.window-content {
+		padding: 1em;
+		max-width: 450px;
+		overflow-y: scroll;
+	}
+
+	h1,
+	h2,
+	h3,
+	h4,
+	h5,
+	h6 {
+		color: #000;
+	}
+
+	h4,
+	h5,
+	h6 {
+		text-transform: none;
+		&::after {
+			content: ":";
+		}
+	}
+
+	section {
+		margin: 1em 0;
+	}
+
+	.intro {
+		margin-top: 0;
+		display: flex;
+		gap: 10px;
+		.icon {
+			width: 30px;
+			height: 35px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font: 25px "Noto Sans Symbols 2";
+			background: #000;
+			color: #fff;
+			filter: grayscale(1);
+			border-radius: 50%;
+			user-select: none;
+		}
+	}
+
+	.random-stats {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 10px;
+
+		.column {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			row-gap: 0.25em;
+		}
+
+		.stat-item {
+			[role="heading"] {
+				display: inline-block;
+				font-weight: bold;
+				margin-right: 0.25em;
+				&::after {
+					content: ":";
+				}
+			}
+			:last-child {
+				display: inline;
+			}
+		}
+	}
+</style>
+
+<CoolWindow title="About Me">
+	<div class="window-content">
+		<h3>About Me</h3>
+		<section class="intro">
+			<div class="icon" role="presentation">
+				<div>👽</div>
+			</div>
+			<div>
+				{myAge}-year-old from the eastern US, software hobbyist since 2004.
+			</div>
+		</section>
+		<section>
+			<CoolSection title="Things I Like">
+				<div class="random-stats">
+					<div class="column left">
+						<div class="stat-item">
+							<div role="heading">fav colors</div>
+							<div>green & blue</div>
+						</div>
+						<div class="stat-item">
+							<div role="heading">fav place</div>
+							<div>the beach</div>
+						</div>
+						<div class="stat-item">
+							<div role="heading">fav season</div>
+							<div>spring</div>
+						</div>
+						<div class="stat-item">
+							<div role="heading">fav time</div>
+							<div>morning twilight a.k.a. the blue hour</div>
+						</div>
+					</div>
+					<div class="column right">
+						<div class="stat-item">
+							<div role="heading">fav activity</div>
+							<div>working outside</div>
+						</div>
+						<div class="stat-item">
+							<div role="heading">fav food</div>
+							<div>tomato jalapeno sandwich</div>
+						</div>
+						<div class="stat-item">
+							<div role="heading">fav squishy</div>
+							<div>corduroy Benny</div>
+						</div>
+					</div>
+				</div>
+			</CoolSection>
+		</section>
+		<section>
+			<h4>Interests & Skills</h4>
+			full-stack web development, instrumental and alt music, vintage bikes, skateboarding
+		</section>
+	</div>
+</CoolWindow>

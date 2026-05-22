@@ -1,0 +1,65 @@
+---
+layout: ./_MainLayout.astro
+---
+
+import scriptUrl from "./_noise-tube.js?url";
+
+<section class="intro">
+  Hello, friends! Do you want your own stick that goes *ooooiiiiihh*?<br/>
+  And when you turn it over it goes *aaauuuooohhh*?
+</section>
+
+<section>
+  ## Installation
+  Download the javascript file and save it to your site:
+  <div class="download-callout">
+    <a class="button" href={scriptUrl}>
+      <span class="icon" role="presentation">🡇</span>
+      <span>noise-tube.js</span>
+    </a>
+  </div>
+</section>
+
+<section>
+  ## Usage
+
+  Import the script at the top of your page
+  and add a `<x-noise-tube>` element to your html.
+
+  ```html
+  <!-- Include the script at the top of your page. -->
+  <script src="noise-tube.js"></script>
+
+  <!-- Place the custom element wherever you want. -->
+  <x-noise-tube></x-noise-tube>
+  ```
+
+  Now you have your own fun tube! Click it to flip it over.
+</section>
+
+<section>
+  ## Customization
+
+  Change the color and size with CSS:
+
+  ```css
+  x-noise-tube {
+    --tube-height: 100px;
+    --slider-height: 10px;
+    --noise-tube-scale: 2;
+    --cap-color: palegreen;
+    --tube-color: mediumorchid;
+    --slider-color: mediumpurple;
+  }
+  ```
+</section>
+
+<section>
+  ## Scripting
+
+  Flip your tubes by calling the `.flip` method with javascript:
+
+  ```javascript
+  document.querySelectorAll("x-noise-tube").forEach(v => v.flip());
+  ```
+</section>

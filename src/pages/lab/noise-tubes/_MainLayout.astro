@@ -1,0 +1,191 @@
+---
+import { Image } from "astro:assets";
+import image from "./click.png";
+---
+
+<!-- 2026/04/27 -->
+<head>
+	<meta charset="utf-8" />
+	<meta name="generator" content={Astro.generator} />
+	<link rel="icon" href="/favicon.svg" />
+	<title>Turtlemay's Tubes</title>
+	<link
+		rel="preload"
+		as="style"
+		href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap"
+	/>
+	<link
+		href="https://fonts.googleapis.com/css2?family=Noto+Sans+Symbols+2&display=swap"
+		rel="stylesheet"
+	/>
+	<script src="./_noise-tube.js"></script>
+</head>
+
+<style is:global>
+	* {
+		box-sizing: border-box;
+	}
+
+	body {
+		margin: 0 0 4em;
+		background: cornsilk;
+	}
+
+	a {
+		color: darkgreen;
+	}
+
+	p {
+		line-height: 1.5em;
+		color: #333;
+	}
+
+	p > code {
+		background: #f9f9f9;
+		padding: 0.25em 0.5em;
+		color: black;
+	}
+
+	pre > code {
+		display: block;
+		padding: 1em;
+	}
+
+	.site-layout {
+		display: flex;
+		flex-direction: column;
+		align-items: safe center;
+		justify-content: safe center;
+	}
+
+	.site-attraction {
+		display: flex;
+		align-items: safe center;
+		justify-content: space-around;
+		gap: 1em;
+		padding: 3em 1em;
+		width: 100%;
+		max-width: 500px;
+
+		x-noise-tube.tube1 {
+			--noise-tube-scale: 2;
+			--cap-color: palegreen;
+			--tube-color: mediumorchid;
+			--slider-color: mediumpurple;
+		}
+
+		x-noise-tube.tube2 {
+			--noise-tube-scale: 1.5;
+			--cap-color: gainsboro;
+			--tube-color: pink;
+			--slider-color: plum;
+		}
+	}
+
+	:has(> .click-me) {
+		position: relative;
+
+		.click-me {
+			position: absolute;
+			left: -60px;
+			bottom: -75px;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			font: 1em sans-serif;
+			transform: rotate(2deg);
+			opacity: 0.15;
+			user-select: none;
+			pointer-events: none;
+		}
+	}
+
+	.site-main {
+		background: white;
+		color: black;
+		font: 1em sans-serif;
+		width: 100%;
+		max-width: 600px;
+		display: inline-block;
+		margin: 1em;
+		border-radius: 5px;
+		border: 1px solid oldlace;
+
+		> * {
+			margin: 2em;
+		}
+
+		.intro em {
+			color: lightcoral;
+		}
+
+		.download-callout {
+			display: flex;
+			justify-content: safe center;
+
+			.button {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				padding: 5px 10px;
+				font: 1em monospace;
+				text-decoration: none;
+				background: lightcoral;
+				color: white;
+				gap: 5px;
+				transition: opacity 200ms;
+
+				.icon {
+					display: flex;
+					align-items: center;
+					justify-content: center;
+					font: 1em "Noto Sans Symbols 2";
+					user-select: none;
+				}
+
+				&:active {
+					opacity: 0.8;
+				}
+			}
+		}
+	}
+
+	.site-footer {
+		color: #333;
+		font: 1em sans-serif;
+		margin: 1em 2em 2em;
+	}
+</style>
+
+<body class="site-layout">
+	<div class="site-attraction">
+		<x-noise-tube></x-noise-tube>
+		<div>
+			<x-noise-tube class="tube1" data-flip></x-noise-tube>
+			<div class="click-me" role="presentation">
+				<Image src={image} alt="click the tube" width={50} />
+			</div>
+		</div>
+		<x-noise-tube class="tube2"></x-noise-tube>
+	</div>
+	<main class="site-main">
+		<slot />
+	</main>
+	<footer class="site-footer">
+		Made by
+		<a href="http://turtlemay.neocities.org/">Turtlemay</a>
+	</footer>
+</body>
+
+<script is:inline>
+	addEventListener("keydown", (event) => {
+		if (event.key === "f") demoFlip();
+	});
+
+	function demoFlip(interval = 200) {
+		document.querySelectorAll("x-noise-tube").forEach((v, i) => {
+			setTimeout(() => v.flip(), interval * i);
+		});
+	}
+</script>

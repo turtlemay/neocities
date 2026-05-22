@@ -1,0 +1,53 @@
+---
+import fs from "fs-extra/esm";
+import MainLayout from "../_MainLayout.astro";
+import ImageWindow from "../site-windows/_ImageWindow.astro";
+import SitesWindow from "../site-windows/_SitesWindow.astro";
+import TextSiteWindow from "../site-windows/_TextSiteWindow.astro";
+import WelcomeWindow from "../site-windows/_WelcomeWindow.astro";
+import AboutWindow from "../site-windows/_AboutWindow.astro";
+import DiaryWindow from "../site-windows/_DiaryWindow.vue";
+import LinksWindow from "../site-windows/_LinksWindow.astro";
+import OtherLinksWindow from "../site-windows/_OtherLinksWindow.astro";
+import { getDigests } from "../../entries/entries.js";
+
+const entriesData = await fs.readJson("./entries/data.json");
+const renderData = getDigests(entriesData);
+---
+
+<style>
+	.window-wrapper:has(.window-underlayer) {
+		z-index: 1;
+
+		@media (width > 1200px) {
+			.window-underlayer {
+				margin: -130px 0 0 0;
+			}
+		}
+	}
+</style>
+
+<MainLayout>
+	<div style="padding: 50px 0 80px;">
+		<div class="window-row">
+			<div style="align-self: end;">
+				<SitesWindow />
+			</div>
+			<WelcomeWindow />
+			<TextSiteWindow />
+		</div>
+		<div class="window-row">
+			<AboutWindow />
+			<div class="window-column" style="align-self: start;">
+				<LinksWindow />
+				<OtherLinksWindow />
+			</div>
+			<div class="window-wrapper">
+				<div class="window-underlayer">
+					<ImageWindow />
+				</div>
+				<DiaryWindow client:load data={renderData} />
+			</div>
+		</div>
+	</div>
+</MainLayout>

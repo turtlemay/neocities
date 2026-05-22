@@ -1,0 +1,64 @@
+---
+import CoolWindow from "../components/CoolWindow.vue";
+import CoolSection from "../components/CoolSection.astro";
+---
+
+<style>
+	.window-content {
+		width: 280px;
+		min-height: 150px;
+		overflow-y: scroll;
+
+		> * {
+			margin: 1em;
+		}
+	}
+
+	section {
+		margin: 0 0 1em;
+	}
+
+	h2 {
+		font-weight: bold;
+		text-transform: none;
+		&::after {
+			content: ":";
+		}
+	}
+
+	ul.links {
+		list-style-type: none;
+		margin: 0;
+		padding: 0;
+		li {
+			margin: 0.25em 0;
+		}
+		.detail {
+			margin-left: 0.25em;
+		}
+	}
+
+	.detailNew {
+		&::after {
+			content: "(New)";
+			display: inline-block;
+			color: red;
+			margin: 0 0 0 0.25em;
+		}
+	}
+</style>
+
+<CoolWindow class="lists-window" title="Local Directory">
+	<div class="window-content">
+		<CoolSection>
+			<div slot="title" style="font-weight: bold;">My Experiments</div>
+			<ul class="links">
+				<li><a href="/lab/text-animation">HTML Text Animator</a></li>
+				<li><a href="/lab/pickle">Ask the Orickle</a></li>
+				<li><a href="/lab/noise-tubes">Noise Tubes</a></li>
+				<li><a href="/lab/calendar">Calendar Widget</a></li>
+			</ul>
+		</CoolSection>
+		<p>This section is for my fun neocities-compatible demos and widgets.</p>
+	</div>
+</CoolWindow>
