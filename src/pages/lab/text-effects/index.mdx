@@ -80,6 +80,7 @@ The following parameters are customizable for each animated element:
 - `char-interval`: Milliseconds between each character becoming animated.
 - `char-active-time`: Milliseconds before resetting the character style.
 - `repeat-delay`: Milliseconds before starting the animation again.
+- `anim-direction`: "forwards", "backwards", "both" (cycle back immediately), or "alternate" (cycle back after delay).
 
 Use CSS variables to change any of these parameters. These can be applied to all elements or to individual elements.
 
@@ -87,11 +88,13 @@ Use CSS variables to change any of these parameters. These can be applied to all
 cool-text {
 	--start-delay: 0;
 	--repeat-delay: 0;
+	--anim-direction: forwards;
 }
 
 cool-text.my-cool-text {
 	--start-delay: 1000;
 	--repeat-delay: 1000;
+	--anim-direction: backwards;
 }
 ```
 </section>
@@ -134,6 +137,9 @@ The animation can be disabled/enabled by applying the `disabled` attribute or se
 
 <section>
 ## Changelog
+2026-06-03
+- `1.1` Added animation direction.
+
 2026-06-02
 - `1.0` Initial release.
 </section>

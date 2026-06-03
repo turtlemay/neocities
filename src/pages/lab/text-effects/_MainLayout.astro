@@ -50,9 +50,16 @@ import SiteAttraction from "./_SiteAttraction.astro";
 			text-decoration: inherit;
 		}
 
-		cool-text .char {
-			transition: transform 600ms ease-out;
-			&.active {
+		cool-text {
+			--char-interval: 150;
+			--repeat-delay: 750;
+			--anim-direction: alternate;
+
+			.char {
+				transition: transform 600ms ease-out;
+			}
+
+			.char.active {
 				transform: translateY(-0.5em);
 			}
 		}

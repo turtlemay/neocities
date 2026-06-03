@@ -28,6 +28,7 @@ export default class extends HTMLElement {
 	get charInterval() { return this.#getNumProp("--char-interval", 100); }
 	get charActiveTime() { return this.#getNumProp("--char-active-time", 250); }
 	get repeatDelay() { return this.#getNumProp("--repeat-delay", 500); }
+	get animDirection() { return this.#getProp("--anim-direction", "forwards"); }
 
 	get disabled() { return this.hasAttribute("disabled"); }
 	set disabled(bool) {
@@ -58,17 +59,36 @@ export default class extends HTMLElement {
 
 		const charElems = this.querySelectorAll(".char:not(.space)");
 
-		for (let i = 0; i < charElems.length; i++) {
-			if (this.disabled || reset) break;
-
-			const v = charElems[i];
-
+		/** @param {Element} v */
+		const updateElem = (v) => {
 			v.classList.add("active");
-
 			waitForMillis(this.charActiveTime)
 				.then(() => v.classList.remove("active"));
+		};
 
-			await waitForMillis(this.charInterval);
+		if (["forwards", "both", "alternate"].some(v => v === this.animDirection)) {
+			for (let i = 0; i < charElems.length; i++) {
+				if (this.disabled || reset) break;
+				updateElem(charElems[i]);
+				await waitForMillis(this.charInterval);
+			}
+		}
+
+		if ("alternate" === this.animDirection)
+			if (!this.disabled && !reset)
+				await waitForMillis(this.repeatDelay);
+
+		if (["backwards", "both", "alternate"].some(v => v === this.animDirection)) {
+			for (let i = charElems.length - 1; i >= 0; i--) {
+				if (this.disabled || reset) break;
+
+				if ("both" === this.animDirection)
+					if (i === charElems.length - 1)
+						continue;
+
+				updateElem(charElems[i]);
+				await waitForMillis(this.charInterval);
+			}
 		}
 
 		this.#running = false;
@@ -76,6 +96,11 @@ export default class extends HTMLElement {
 
 		if (!this.disabled && !reset)
 			await waitForMillis(this.repeatDelay);
+	}
+
+	#getProp(property = "", defaultValue = "") {
+		const value = getComputedStyle(this).getPropertyValue(property);
+		return value || defaultValue;
 	}
 
 	#getNumProp(property = "", defaultValue = 0) {
