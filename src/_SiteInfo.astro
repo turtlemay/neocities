@@ -27,6 +27,13 @@ function getDateText(date = new Date(), locale = "en-CA") {
 		}
 	}
 
+	a:link,
+	a:visited {
+		background: transparent;
+		color: inherit;
+		text-decoration: underline;
+	}
+
 	section {
 		margin: 0.25em 0;
 		width: 200px;
@@ -85,6 +92,7 @@ function getDateText(date = new Date(), locale = "en-CA") {
 	</div>
 	<div class="bottom">
 		<div>Last build: {getDateText()}</div>
+		<div>Source: <a href="https://github.com/turtlemay/neocities">Git repository</a></div>
 	</div>
 	<div class="button-container">
 		<button onclick="closeSiteInfo(this)">Close</button>
