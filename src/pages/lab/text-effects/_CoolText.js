@@ -43,10 +43,7 @@ export default class extends HTMLElement {
 				renderCharsHtml(`${v.textContent}`));
 			v.replaceWith(frag);
 		}
-		while (true) {
-			await this.#animRoutine();
-			await waitForMillis(this.repeatDelay);
-		}
+		while (true) await this.#animRoutine();
 	}
 
 	async #animRoutine() {
@@ -76,6 +73,9 @@ export default class extends HTMLElement {
 
 		this.#running = false;
 		this.removeEventListener("reset", resetListener);
+
+		if (!this.disabled && !reset)
+			await waitForMillis(this.repeatDelay);
 	}
 
 	#getNumProp(property = "", defaultValue = 0) {
