@@ -1,0 +1,60 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	margin: 0;
+}
+
+a {
+	color: mediumvioletred;
+}
+
+main {
+	font: 12pt "Noto Serif";
+	line-height: 1.5;
+	color: #222;
+	background: white;
+
+	> * {
+		margin: 2em 2em 3em;
+	}
+}
+
+h1, h2, h3, h4, h5, h6 {
+	color: black;
+}
+
+h1 {
+	color: cornflowerblue;
+	border-bottom: 3px solid cornflowerblue;
+}
+
+h2 {
+	border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+
+	li:before {
+		content: "❖";
+		margin: 0 0.5em 0 0;
+		color: rgba(0, 0, 0, 0.15);
+	}
+}
+
+pre:has(> code) {
+	tab-size: 1em;
+	font-size: 10pt;
+	padding: 1em;
+	border-radius: 0.5em;
+}
+
+p code, li code {
+	background-color: #eee;
+	color: mediumvioletred;
+	padding: 0 0.25em;
+	border-radius: 0.5em;
+}

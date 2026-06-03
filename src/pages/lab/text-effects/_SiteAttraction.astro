@@ -1,0 +1,73 @@
+<style>
+.demo-container {
+	padding: 4em;
+	text-align: center;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: safe center;
+	gap: 2em;
+
+	cool-text:nth-of-type(1) {
+		font: 30pt "Noto Serif";
+		color: cornflowerblue;
+
+		.char {
+			transition-property: transform, color;
+			transition-timing-function: ease-out;
+			transition-duration: 600ms;
+		}
+
+		.char.active {
+			transform: translateY(-0.4em);
+			color: palevioletred;
+		}
+	}
+
+	cool-text:nth-of-type(2) {
+		font: 30pt "Noto Serif";
+		color: cornflowerblue;
+
+		.char {
+			transition-property: transform, color;
+			transition-timing-function: ease-out;
+			transition-duration: 600ms;
+		}
+
+		.char.active {
+			transform: rotate(45deg) translateX(0.25em);
+			color: palevioletred;
+		}
+	}
+
+	cool-text:nth-of-type(3) {
+		font: 30pt "Noto Serif";
+		color: cornflowerblue;
+
+		.char {
+			transition-property: transform, color;
+			transition-timing-function: ease-out;
+			transition-duration: 600ms;
+		}
+
+		.char.active {
+			transform: scale(1.5, 0.8) translateY(0.25em);
+			color: palevioletred;
+		}
+	}
+}
+</style>
+
+<div class="demo-container">
+	<cool-text>
+		<b>Lorem ipsum</b><br />
+		<i>dolor sit amet</i>
+	</cool-text>
+	<cool-text>
+		Tempus leo<br />
+		<i>eu aenean</i>
+	</cool-text>
+	<cool-text>
+		<u>Quisque faucibus</u><br />
+		ex sapien vitae
+	</cool-text>
+</div>

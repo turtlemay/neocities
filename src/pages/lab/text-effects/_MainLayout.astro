@@ -1,0 +1,77 @@
+---
+import SiteAttraction from "./_SiteAttraction.astro";
+---
+
+<head>
+	<meta charset="utf-8" />
+	<meta name="generator" content={Astro.generator} />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<link rel="icon" href="/favicon.svg" />
+	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" />
+	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" />
+	<title>Turtlemay's Text Effects</title>
+	<script>import "./index.css";</script>
+</head>
+
+<script>
+	import CoolText from "./_CoolText.js";
+	customElements.define("cool-text", CoolText);
+</script>
+
+<style>
+	body {
+		background: ghostwhite;
+	}
+
+	.site-layout {
+		> * {
+			margin: 0 auto;
+		}
+	}
+
+	.site-main-wrapper {
+		border: 10px solid rgba(0, 0, 0, 0.025);
+		border-radius: 0.5em;
+		max-width: 700px;
+		display: flex;
+	}
+
+	.site-main {
+		width: 100%;
+	}
+
+	.site-footer {
+		padding: 2em;
+		margin: 0 0 5em;
+		font: 12pt "Noto Serif";
+		text-align: center;
+
+		a {
+			text-decoration: inherit;
+		}
+
+		cool-text .char {
+			transition: transform 600ms ease-out;
+			&.active {
+				transform: translateY(-0.5em);
+			}
+		}
+	}
+</style>
+
+<body class="site-layout">
+	<aside class="site-attraction" role="presentation">
+		<SiteAttraction />
+	</aside>
+	<div class="site-main-wrapper">
+		<main class="site-main">
+			<slot />
+		</main>
+	</div>
+	<footer class="site-footer">
+			Made by
+			<cool-text>
+				<a href="https://turtlemay.neocities.org/">Turtlemay</a>
+			</cool-text>
+	</footer>
+</body>

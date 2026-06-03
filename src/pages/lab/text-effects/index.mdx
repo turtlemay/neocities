@@ -1,0 +1,139 @@
+---
+layout: ./_MainLayout.astro
+---
+import scriptUrl from "./_CoolText.js?url";
+
+<section>
+# Turtlemay's Text Effects
+
+This web component lets you add a repeating character-by-character animation to any text.
+</section>
+
+<section>
+## Installation
+
+Download the
+<a href={scriptUrl}>javascript file</a>
+and save it to your site.
+
+Then import the module and register it as a custom element.
+
+```html
+<script type="module">
+	// Use the default exported component.
+	import CoolText from "./CoolText.js";
+
+	// Register the custom element as `cool-text`
+	// or choose your own name.
+	customElements.define("cool-text", CoolText);
+</script>
+```
+</section>
+
+<section>
+## Basic Usage
+
+### Create An Element
+
+Place any text in the custom element. It is *inline-level* by default. You can apply whatever CSS you want.
+
+```html
+<cool-text>this text will be animated</cool-text>
+```
+
+### Define Your Style & Transition
+
+You can style *all* `cool-text` type elements or give them individual classes for styling.
+
+```html
+<cool-text class="mytext1">foo bar</cool-text>
+<cool-text class="mytext2">baz qux</cool-text>
+```
+
+Each character of the text will be automatically wrapped in an animatable `<span class="char">`. Apply your own transition rules to the `.char` class.
+
+```css
+cool-text .char {
+	transition-property: transform, color;
+	transition-timing-function: ease-out;
+	transition-duration: 600ms;
+}
+```
+
+During animation, each `.char` will receive the `.active` class in sequence.
+Choose your styles for the active characters.
+
+```css
+cool-text .char.active {
+	transform: translateY(-0.4em);
+}
+```
+
+The text will now be smoothly animated on a loop.
+</section>
+
+<section>
+## Advanced Options
+
+The following parameters are customizable for each animated element:
+- `start-delay`: Milliseconds before the animation starts.
+- `char-interval`: Milliseconds between each character becoming animated.
+- `char-active-time`: Milliseconds before resetting the character style.
+- `repeat-delay`: Milliseconds before starting the animation again.
+
+Use CSS variables to change any of these parameters. These can be applied to all elements or to individual elements.
+
+```css
+cool-text {
+	--start-delay: 0;
+	--repeat-delay: 0;
+}
+
+cool-text.my-cool-text {
+	--start-delay: 1000;
+	--repeat-delay: 1000;
+}
+```
+</section>
+
+<section>
+## Tips
+
+Nested elements, links, and different font styles in the same animation are supported. Word wrapping, text selection, and copying also works as normal.
+
+### Hover Effect
+
+You can show the animation on hover only by targeting `.char.active` under the `:hover` pseudo-class.
+
+```css
+cool-text:hover .char.active {
+	transform: translateY(-0.4em);
+}
+```
+
+### Reset Animation
+
+The animation can be reset with the `.reset()` method.
+
+```html
+<!-- Reset animation on hover. -->
+<cool-text onmouseenter="this.reset()">asdf</cool-text>
+```
+
+### Disable Animation
+
+The animation can be disabled/enabled by applying the `disabled` attribute or setting the `.disabled` property.
+
+```html
+<!-- Animation starts disabled -->
+<cool-text id="myText" disabled>asdf</cool-text>
+<!-- Enable the animation -->
+<script>myText.disabled = false;</script>
+```
+</section>
+
+<section>
+## Changelog
+2026-06-02
+- `1.0` Initial release.
+</section>
