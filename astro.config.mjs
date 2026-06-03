@@ -6,6 +6,11 @@ import mdx from "@astrojs/mdx";
 import { dataFetcher } from "./entries/integration.ts";
 
 export default defineConfig({
+    vite: {
+        build: {
+            assetsInlineLimit: 0,
+        },
+    },
     integrations: [vue(), mdx(), dataFetcher()],
     fonts: [
         {
