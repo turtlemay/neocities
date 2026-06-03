@@ -50,7 +50,7 @@ export default class extends HTMLElement {
 	}
 
 	async #animRoutine() {
-		if (this.#running) return;
+		if (this.disabled || this.#running) return;
 		this.#running = true;
 
 		let reset = false;
