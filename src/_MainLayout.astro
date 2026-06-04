@@ -1,7 +1,5 @@
 ---
 import BaseHead from "./_BaseHead.astro";
-import SiteModal from "./components/SiteModal.astro";
-import SiteInfo from "./_SiteInfo.astro";
 import "./global.css";
 ---
 
@@ -11,8 +9,5 @@ import "./global.css";
 	</head>
 	<body class="rainbow">
 		<slot />
-		<SiteModal opener="[data-site-info-opener]">
-			<SiteInfo />
-		</SiteModal>
 	</body>
 </html>

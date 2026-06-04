@@ -1,6 +1,8 @@
 ---
 import fs from "fs-extra/esm";
 import MainLayout from "../_MainLayout.astro";
+import SiteModal from "../components/SiteModal.astro";
+import SiteInfo from "../_SiteInfo.astro";
 import ImageWindow from "../site-windows/_ImageWindow.astro";
 import SitesWindow from "../site-windows/_SitesWindow.astro";
 import TextSiteWindow from "../site-windows/_TextSiteWindow.astro";
@@ -51,3 +53,7 @@ const renderData = getDigests(entriesData);
 		</div>
 	</div>
 </MainLayout>
+
+<SiteModal opener="[data-site-info-opener]">
+	<SiteInfo />
+</SiteModal>
