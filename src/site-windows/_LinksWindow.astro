@@ -53,7 +53,7 @@ import CoolSection from "../components/CoolSection.astro";
 		<CoolSection>
 			<div slot="title" style="font-weight: bold;">My Experiments</div>
 			<ul class="links">
-				<li class="detailNew"><a href="/lab/text-effects">HTML Text Effects</a></li>
+				<li data-new-until="2026/07/04"><a href="/lab/text-effects">HTML Text Effects</a></li>
 				<li><a href="/lab/text-animation">HTML Text Animator</a></li>
 				<li><a href="/lab/pickle">Ask the Orickle</a></li>
 				<li><a href="/lab/noise-tubes">Noise Tubes</a></li>
@@ -63,3 +63,11 @@ import CoolSection from "../components/CoolSection.astro";
 		<p>This section is for my fun neocities-compatible demos and widgets.</p>
 	</div>
 </CoolWindow>
+
+<script is:inline>
+	document.querySelectorAll("[data-new-until]").forEach(elem => {
+		const newUntilDate = new Date(elem.getAttribute("data-new-until"));
+		const isNew = Date.now() < newUntilDate;
+		if (isNew) elem.classList.add("detailNew");
+	});
+</script>
