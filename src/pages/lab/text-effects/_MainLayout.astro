@@ -10,7 +10,6 @@ import SiteAttraction from "./_SiteAttraction.astro";
 	<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" />
 	<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap" />
 	<title>Turtlemay's Text Effects</title>
-	<script>import "./index.css";</script>
 </head>
 
 <script>
@@ -18,9 +17,56 @@ import SiteAttraction from "./_SiteAttraction.astro";
 	customElements.define("cool-text", CoolText);
 </script>
 
-<style>
+<style is:global>
+	* {
+		box-sizing: border-box;
+	}
+
 	body {
+		margin: 0;
 		background: ghostwhite;
+	}
+
+	a {
+		color: mediumvioletred;
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: black;
+	}
+
+	h1 {
+		color: cornflowerblue;
+		border-bottom: 3px solid cornflowerblue;
+	}
+
+	h2 {
+		border-bottom: 3px solid rgba(0, 0, 0, 0.05);
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+
+		li:before {
+			content: "❖";
+			margin: 0 0.5em 0 0;
+			color: rgba(0, 0, 0, 0.15);
+		}
+	}
+
+	pre:has(> code) {
+		tab-size: 1em;
+		font-size: 10pt;
+		padding: 1em;
+		border-radius: 0.5em;
+	}
+
+	p code, li code {
+		background-color: #eee;
+		color: mediumvioletred;
+		padding: 0 0.25em;
+		border-radius: 0.5em;
 	}
 
 	.site-layout {
@@ -38,6 +84,14 @@ import SiteAttraction from "./_SiteAttraction.astro";
 
 	.site-main {
 		width: 100%;
+		font: 12pt "Noto Serif";
+		line-height: 1.5;
+		color: #222;
+		background: white;
+
+		> * {
+			margin: 2em 2em 3em;
+		}
 	}
 
 	.site-footer {
