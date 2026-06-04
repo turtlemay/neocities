@@ -11,7 +11,9 @@ import scriptUrl from "./_noise-tube.js?url";
 
 <section>
   ## Installation
+
   Download the javascript file and save it to your site:
+
   <div class="download-callout">
     <a class="button" href={scriptUrl}>
       <span class="icon" role="presentation">🡇</span>
@@ -60,6 +62,7 @@ import scriptUrl from "./_noise-tube.js?url";
   Flip your tubes by calling the `.flip` method with javascript:
 
   ```javascript
-  document.querySelectorAll("x-noise-tube").forEach(v => v.flip());
+  document.querySelectorAll("x-noise-tube")
+    .forEach(v => v.flip());
   ```
 </section>
